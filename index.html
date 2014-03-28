@@ -250,6 +250,7 @@ $(document).ready(function() {
   url: "/jsontocsv", // my backoffice comunication api url
   success: function(result){
     console.dir(result);
+    window.location.href = "/wrangler/lyra/src/index.html"
   }
   });
   <!-- $.post("/jsontocsv", postData) -->
