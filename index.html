@@ -244,15 +244,15 @@ $(document).ready(function() {
   replaceHead = $($('.dataTables_scrollHeadInner').find('table').find('tr')[1]).find('th');
   $('.dataTables_scrollBody').find('table').find('thead').find('tr').find('th').replaceWith(replaceHead);
   postData = $('.dataTables_scrollBody').find('table').tableToJSON()
-  <!-- $.ajax({ -->
-  <!-- type: "POST", // you request will be a post request -->
-  <!-- data: postData, -->
-  <!-- url: "/jsontocsv", // my backoffice comunication api url -->
-  <!-- success: function(result){   -->
-  <!--   console.dir(result); -->
-  <!-- } -->
-  <!-- }); -->
-  $.post("/jsontocsv", postData)
+  $.ajax({
+  type: "POST", // you request will be a post request
+  data: JSON.stringify(postData),
+  url: "/jsontocsv", // my backoffice comunication api url
+  success: function(result){
+    console.dir(result);
+  }
+  });
+  <!-- $.post("/jsontocsv", postData) -->
   
 
 });

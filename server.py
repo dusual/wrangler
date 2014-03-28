@@ -1,13 +1,20 @@
 import bottle
-from bottle import response, route
+from bottle import response, route, request
 from bottle import static_file
+import json
+import csv
 
-
-@route('/jsontocsv')
-def jsontocsv(request=None, method=['GET', 'POST']):
-    import pdb; pdb.set_trace()
-    print request
-    return '123'
+@route('/jsontocsv', method='POST')
+def jsontocsv():
+    f =  request.body
+    data = json.load(f)
+    f.close()
+    fieldnames = data[0].keys()
+    
+    with open('./wrangler/csv/new.csv','w') as f:
+        dict_writer = csv.DictWriter(f, fieldnames=fieldnames)
+        dict_writer.writeheader()
+        dict_writer.writerows(data)
 
 
 @route('/wrangler/<filename:path>')
